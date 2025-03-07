@@ -1,0 +1,248 @@
+﻿# -----------------------------------------------------
+# 4) Acquire Packages User 1(kienboec)
+# -----------------------------------------------------
+
+### Acquire Package 1 - User 1
+POST {{baseUrl}}/transactions/packages
+Content-Type: application/json
+Authorization: Bearer {{user1Token}}
+
+### Acquire Package 2 - User 1
+POST {{baseUrl}}/transactions/packages
+Content-Type: application/json
+Authorization: Bearer {{user1Token}}
+
+### Acquire Package 3 - User 1
+POST {{baseUrl}}/transactions/packages
+Content-Type: application/json
+Authorization: Bearer {{user1Token}}
+
+### Acquire Package 4 - User 1
+POST {{baseUrl}}/transactions/packages
+Content-Type: application/json
+Authorization: Bearer {{user1Token}}
+
+### Should fail - No Money - User 1
+POST {{baseUrl}}/transactions/packages
+Content-Type: application/json
+Authorization: Bearer {{user1Token}}
+
+# -----------------------------------------------------
+# 5) Acquire Packages - User 2(altenhof)
+# -----------------------------------------------------
+
+### Acquire Package 5 - User 2
+POST {{baseUrl}}/transactions/packages
+Content-Type: application/json
+Authorization: Bearer {{user2Token}}
+
+### Acquire Package 6 - User 2
+POST {{baseUrl}}/transactions/packages
+Content-Type: application/json
+Authorization: Bearer {{user2Token}}
+
+### Should fail - No Packages Available - User 2
+POST {{baseUrl}}/transactions/packages
+Content-Type: application/json
+Authorization: Bearer {{user2Token}}
+
+# -----------------------------------------------------
+# 7) Acquire New Packages - User 2(altenhof)
+# -----------------------------------------------------
+
+### Acquire Package 7 - User 2
+POST {{baseUrl}}/transactions/packages
+Content-Type: application/json
+Authorization: Bearer {{user2Token}}
+
+### Acquire Package 8 - User 2
+POST {{baseUrl}}/transactions/packages
+Content-Type: application/json
+Authorization: Bearer {{user2Token}}
+
+### Should fail - No Money - User 2
+POST {{baseUrl}}/transactions/packages
+Content-Type: application/json
+Authorization: Bearer {{user2Token}}
+
+# -----------------------------------------------------
+# 8) Show All Cards - User 1(kienboec)
+# -----------------------------------------------------
+
+### Get Cards - User 1
+GET {{baseUrl}}/cards
+Authorization: Bearer {{user1Token}}
+
+### Should fail - No token
+GET {{baseUrl}}/cards
+
+# -----------------------------------------------------
+# 9) Show All Cards - User 2(altenhof)
+# -----------------------------------------------------
+
+### Get Cards - User 2
+GET {{baseUrl}}/cards
+Authorization: Bearer {{user2Token}}
+
+# -----------------------------------------------------
+# 10) Show Unconfigured Deck
+# -----------------------------------------------------
+
+### Get Deck - User 1
+GET {{baseUrl}}/deck
+Authorization: Bearer {{user1Token}}
+
+### Get Deck - User 2
+GET {{baseUrl}}/deck
+Authorization: Bearer {{user2Token}}
+
+# -----------------------------------------------------
+# 11) Configure Deck
+# -----------------------------------------------------
+
+
+### Get Deck After Configuration - User 1
+GET {{baseUrl}}/deck
+Authorization: Bearer {{user1Token}}
+
+
+### Get Deck After Configuration - User 2
+GET {{baseUrl}}/deck
+Authorization: Bearer {{user2Token}}
+
+
+### Get Deck After Failed Configuration - User 2
+GET {{baseUrl}}/deck
+Authorization: Bearer {{user2Token}}
+
+
+# -----------------------------------------------------
+# 12) Show Configured Deck
+# -----------------------------------------------------
+
+### Get Deck - User 1
+GET {{baseUrl}}/deck
+Authorization: Bearer {{user1Token}}
+
+### Get Deck - User 2
+GET {{baseUrl}}/deck
+Authorization: Bearer {{user2Token}}
+
+# -----------------------------------------------------
+# 13) Show Deck - Different Format
+# -----------------------------------------------------
+
+### Get Deck Plain Format - User 1
+GET {{baseUrl}}/deck?format=plain
+Authorization: Bearer {{user1Token}}
+
+### Get Deck Plain Format - User 2
+GET {{baseUrl}}/deck?format=plain
+Authorization: Bearer {{user2Token}}
+
+# -----------------------------------------------------
+# 14) Edit User Data
+# -----------------------------------------------------
+
+### Get User Profile - User 1
+GET {{baseUrl}}/users/{{user1}}
+Authorization: Bearer {{user1Token}}
+
+### Get User Profile - User 2
+GET {{baseUrl}}/users/{{user2}}
+Authorization: Bearer {{user2Token}}
+
+
+### Get Updated User Profile - User 1
+GET {{baseUrl}}/users/{{user1}}
+Authorization: Bearer {{user1Token}}
+
+### Get Updated User Profile - User 2
+GET {{baseUrl}}/users/{{user2}}
+Authorization: Bearer {{user2Token}}
+
+### Should fail - Access Denied - User 2 accessing User 1 profile
+GET {{baseUrl}}/users/{{user2}}
+Authorization: Bearer {{user1Token}}
+
+### Should fail - Access Denied - User 1 accessing User 2 profile
+GET {{baseUrl}}/users/{{user1}}
+Authorization: Bearer {{user2Token}}
+
+### Should fail - Access Denied - User 2 updating User 1 profile
+PUT {{baseUrl}}/users/{{user1}}
+Content-Type: application/json
+Authorization: Bearer {{user2Token}}
+
+{
+  "Name": "Hoax",
+  "Bio": "me playin...",
+  "Image": ":-)"
+}
+
+### Should fail - Access Denied - User 1 updating User 2 profile
+PUT {{baseUrl}}/users/{{user2}}
+Content-Type: application/json
+Authorization: Bearer {{user1Token}}
+
+{
+  "Name": "Hoax",
+  "Bio": "me codin...",
+  "Image": ":-D"
+}
+
+### Should fail - User not found
+GET {{baseUrl}}/users/someGuy
+Authorization: Bearer {{user1Token}}
+
+# -----------------------------------------------------
+# 15) Get Stats
+# -----------------------------------------------------
+
+### Get Stats - User 1
+GET {{baseUrl}}/stats
+Authorization: Bearer {{user1Token}}
+
+### Get Stats - User 2
+GET {{baseUrl}}/stats
+Authorization: Bearer {{user2Token}}
+
+# -----------------------------------------------------
+# 16) Get Scoreboard
+# -----------------------------------------------------
+
+### Get Scoreboard
+GET {{baseUrl}}/scoreboard
+Authorization: Bearer {{user1Token}}
+
+# -----------------------------------------------------
+# 17) Battle
+# -----------------------------------------------------
+
+### Start Battle - User 1
+POST {{baseUrl}}/battles
+Authorization: Bearer {{user1Token}}
+
+### Start Battle - User 2
+POST {{baseUrl}}/battles
+Authorization: Bearer {{user2Token}}
+
+# -----------------------------------------------------
+# 18) Get Stats After Battle
+# -----------------------------------------------------
+
+### Get Stats After Battle - User 1
+GET {{baseUrl}}/stats
+Authorization: Bearer {{user1Token}}
+
+### Get Stats After Battle - User 2
+GET {{baseUrl}}/stats
+Authorization: Bearer {{user2Token}}
+
+# -----------------------------------------------------
+# 19) Get Scoreboard After Battle
+# -----------------------------------------------------
+
+### Get Scoreboard After Battle
+GET {{baseUrl}}/scoreboard
+Authorization: Bearer {{user1Token}}
